@@ -1,38 +1,34 @@
-# VanillaEnchants
-Ever wanted to have working Enchants on your PocketMine-MP server? Well now you can!
+# VanillaEC
 
-# How to install
-Drop the phar file into plugins folder as usual, then just reload server
+<a href="https://poggit.pmmp.io/p/VanillaEC"><img src="https://poggit.pmmp.io/shield.dl.total/VanillaEC"></a>
+[![Discord](https://img.shields.io/discord/869130615851745281.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/YYquESwF)
+
+**NOTICE:** This plugin branch is for PocketMine-MP 4.
+
+Additional enchants for PocketMine-MP
+With easy-to-understand configuration.
+
+# Features
+- Additional enchants for PocketMine-MP
+- Easy setup.
+- 
+# How to Install
+
+1. Download the latest version
+2. Place the `VanillaEC.phar` file into the `plugins` folder.
+3. Restart the server.
+4. Done!
 
 # Implemented Enchantments
-
-- [x] Protection
-- [x] Fire protection
-- [x] Feather falling
-- [x] Blast protection
-- [x] Projectile protection
-- [x] Thorns
-- [x] Respiration
-- [x] Depth strider
-- [x] Aqua affinity
-- [x] Sharpness
-- [x] Smite
 - [x] Bane of athropods
-- [x] Knockback
-- [x] Fire aspect
-- [x] Looting
-- [x] Efficiency
-- [x] Silk touch
-- [x] Unbreaking
 - [x] Fortune
-- [x] Power
-- [x] Punch
-- [x] Flame
-- [x] Infinity
+- [x] Looting
+- [x] Smite
 - [ ] Luck of the sea
 - [ ] Lure
-- [ ] Frost walker
-- [x] Mending
+- [ ] Frost Walker
 
-# For support
-Twitter: @TheAz928
+# Additional Notes
+
+- If you found bugs or want to give suggestions, please visit <a href="https://github.com/David-pm-pl/VanillaEC/issues">here</a> or join our Discord server.
+- We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/David-pm-pl/VanillaEC/pulls">here</a>.
