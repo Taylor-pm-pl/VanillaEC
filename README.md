@@ -11,7 +11,7 @@ With easy-to-understand configuration.
 # Features
 - Additional enchants for PocketMine-MP
 - Easy setup.
-- 
+ 
 # How to Install
 
 1. Download the latest version
