@@ -1,0 +1,8 @@
+---
+name: VanillaEC
+version: 0.0.01
+api: 4.0.0
+author: DavidGlitch04
+website: https://github.com/DavidGlitch04
+main: DavidGlitch04\VanillaEC\Main
+...
