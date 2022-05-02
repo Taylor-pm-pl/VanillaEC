@@ -14,14 +14,10 @@ use pocketmine\item\{
     Item,
     ItemIds,
     ItemFactory,
-    ItemIdentifier,
-    LegacyStringToItemParser,
-    enchantment\ItemFlags,
-    enchantment\StringToEnchantmentParser,
-    enchantment\Rarity
+    LegacyStringToItemParser
 };
-use pocketmine\entity\{Entity, EntityFactory, Living};
-use pocketmine\data\bedrock\{EnchantmentIdMap, EnchantmentIds, EntityLegacyIds};
+use pocketmine\entity\Living;
+use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\{EntityDamageByEntityEvent, EntityShootBowEvent};
