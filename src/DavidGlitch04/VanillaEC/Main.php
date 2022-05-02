@@ -136,7 +136,6 @@ class Main extends PluginBase implements Listener{
 						return;
 					}
 			 		foreach($this->getConfig()->get("looting.entities") as $eid => $items){
-			 			$id = constant(EntityLegacyIds::class."::".strtoupper($eid));
 			 			$drops = $this->getLootingDrops($player->getDrops(), $items, $add);
 			 			foreach($drops as $drop){
 			 				$damager->getWorld()->dropItem($player->getPosition()->asVector3(), $drop);
