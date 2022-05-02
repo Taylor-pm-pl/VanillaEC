@@ -21,7 +21,7 @@ use pocketmine\item\{
     enchantment\Rarity
 };
 use pocketmine\entity\{Entity, EntityFactory, Living};
-use pocketmine\data\bedrock\{EnchantmentIdMap, EnchantmentIds};
+use pocketmine\data\bedrock\{EnchantmentIdMap, EnchantmentIds, EntityLegacyIds};
 use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\{EntityDamageByEntityEvent, EntityShootBowEvent};
@@ -112,10 +112,10 @@ class Main extends PluginBase implements Listener{
      */
 	public function onDamage(EntityDamageByEntityEvent $event) : void{
 		$player = $event->getEntity();
-		
-		if(($damager = $event->getDamager()) instanceof Player){
+		$damager = $event->getDamager();
+		if($damager instanceof Player){
 			$item = $damager->getInventory()->getItemInHand();
-				$enchantment = new SmiteEnchantment();
+			$enchantment = new SmiteEnchantment();
 			if($item->hasEnchantment(EnchantmentIdMap::getInstance()->fromId($enchantment->getMcpeId()))){
 				if(in_array($player::getNetworkTypeId(), self::UNDEAD)){
 					$event->setBaseDamage($event->getBaseDamage() + (2.5 * $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($enchantment->getMcpeId()))));
@@ -131,17 +131,17 @@ class Main extends PluginBase implements Listener{
 			 if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($en->getMcpeId()))) > 0){
 			 	if($player instanceof Player == false and $player instanceof Living and $event->getFinalDamage() >= $player->getHealth()){
 			 		$add = mt_rand(0, $level + 1);
+					if(is_bool($this->getConfig()->get("looting.entities"))){
+						$this->getLogger()->debug("There is an error (looting) in the config of vanillaEC");
+						return;
+					}
 			 		foreach($this->getConfig()->get("looting.entities") as $eid => $items){
-			 			$id = constant(Entity::class."::".strtoupper($eid));
-						
-			 			if($player::getNetworkTypeId() == $id){
-			 				$drops = $this->getLootingDrops($player->getDrops(), $items, $add);
-			 				foreach($drops as $drop){
-			 				    $damager->getWorld()->dropItem($player->getPosition()->asVector3(), $drop);
-			 				}
-							
-			 				$player->flagForDespawn();
+			 			$id = constant(EntityLegacyIds::class."::".strtoupper($eid));
+			 			$drops = $this->getLootingDrops($player->getDrops(), $items, $add);
+			 			foreach($drops as $drop){
+			 				$damager->getWorld()->dropItem($player->getPosition()->asVector3(), $drop);
 			 			}
+			 			$player->flagForDespawn();
 			 		}
 			 	}
 			 }
@@ -159,17 +159,14 @@ class Main extends PluginBase implements Listener{
 		
 	 	foreach($items as $ite){
 	 		$item = LegacyStringToItemParser::getInstance()->parse($ite);
-			
 	 		foreach($drops as $drop){
 	 			if($drop->getId() == $item->getId()){
 	 				$drop->setCount($drop->getCount() + $add);
 	 			}
-				
 	 			$r[] = $drop;
 	 			break;
 	 		}
 	 	}
-		
 	 	return $r;
 	 }
 
