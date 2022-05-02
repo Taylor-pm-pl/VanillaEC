@@ -117,7 +117,7 @@ class Main extends PluginBase implements Listener{
 					$event->setBaseDamage($event->getBaseDamage() + (2.5 * $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($enchantment->getMcpeId()))));
 				}
 			}
-				$ench = new BaneOfArthropodsEnchantment();
+			$ench = new BaneOfArthropodsEnchantment();
 			if($item->hasEnchantment(EnchantmentIdMap::getInstance()->fromId($ench->getMcpeId()))){
 				if(in_array($player::getNetworkTypeId(), self::ARTHROPODS)){
 					$event->setBaseDamage($event->getBaseDamage() + (2.5 * $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($ench->getMcpeId()))));
