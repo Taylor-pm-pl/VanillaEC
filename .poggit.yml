@@ -5,5 +5,5 @@ branches:
 projects:
   VanillaEC:
     path: ""
-    icon: icon.gif
+    icon: icon.png
 ...
