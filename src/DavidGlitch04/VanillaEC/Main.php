@@ -131,7 +131,7 @@ class Main extends PluginBase implements Listener{
 						$this->getLogger()->debug("There is an error (looting) in the config of vanillaEC");
 						return;
 					}
-			 		foreach($this->getConfig()->get("looting.entities") as $eid => $items){
+			 		foreach($this->getConfig()->get("looting.entities", []) as $eid => $items){
 			 			$drops = $this->getLootingDrops($player->getDrops(), $items, $add);
 			 			foreach($drops as $drop){
 			 				$damager->getWorld()->dropItem($player->getPosition()->asVector3(), $drop);
