@@ -9,9 +9,10 @@ Additional enchants for PocketMine-MP
 With easy-to-understand configuration.
 
 # Features
+
 - Additional enchants for PocketMine-MP
 - Easy setup.
- 
+
 # How to Install
 
 1. Download the latest version
@@ -20,6 +21,7 @@ With easy-to-understand configuration.
 4. Done!
 
 # Implemented Enchantments
+
 - [x] Bane of athropods
 - [x] Fortune
 - [x] Looting
@@ -30,5 +32,7 @@ With easy-to-understand configuration.
 
 # Additional Notes
 
-- If you found bugs or want to give suggestions, please visit <a href="https://github.com/David-pm-pl/VanillaEC/issues">here</a> or join our Discord server.
-- We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/David-pm-pl/VanillaEC/pulls">here</a>.
+- If you found bugs or want to give suggestions, please visit <a href="https://github.com/David-pm-pl/VanillaEC/issues">
+  here</a> or join our Discord server.
+- We accept all contributions! If you want to contribute, please make a pull request
+  in <a href="https://github.com/David-pm-pl/VanillaEC/pulls">here</a>.

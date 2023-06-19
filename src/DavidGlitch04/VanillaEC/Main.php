@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DavidGlitch04\VanillaEC;
 
 use DavidGlitch04\VanillaEC\Enchantment\{BaneOfArthropodsEnchantment,
-    EnchantmentTrait,
     FortuneEnchantment,
     LootingEnchantment,
     SmiteEnchantment};
@@ -22,8 +21,8 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener
 {
-	
-	public const UNDEAD = [
+
+    public const UNDEAD = [
         EntityIds::ZOMBIE,
         EntityIds::HUSK,
         EntityIds::WITHER,
@@ -32,16 +31,16 @@ class Main extends PluginBase implements Listener
         EntityIds::WITHER_SKELETON,
         EntityIds::ZOMBIE_PIGMAN,
         EntityIds::ZOMBIE_VILLAGER
-	];
-	
-	public const ARTHROPODS = [
+    ];
+
+    public const ARTHROPODS = [
         EntityIds::SPIDER,
         EntityIds::CAVE_SPIDER,
         EntityIds::SILVERFISH,
         EntityIds::ENDERMITE
-	];
-	
-	public function onLoad(): void
+    ];
+
+    public function onLoad(): void
     {
         $this->saveDefaultConfig();
         $enchants = [
@@ -55,26 +54,28 @@ class Main extends PluginBase implements Listener
             StringToEnchantmentParser::getInstance()->register($enchant->getId(), fn() => $enchant);
         }
     }
-	
-	public function onEnable(): void{
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-	}
+
+    public function onEnable(): void
+    {
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
 
     /**
      * @param BlockBreakEvent $event
      */
-	public function onBreak(BlockBreakEvent $event) : void{
-		$block = $event->getBlock();
-		$item = $event->getItem();
-		$enchantment = new FortuneEnchantment();
+    public function onBreak(BlockBreakEvent $event): void
+    {
+        $block = $event->getBlock();
+        $item = $event->getItem();
+        $enchantment = new FortuneEnchantment();
 
         if ($block->isSameState(VanillaBlocks::OAK_LEAVES())) {
             if (mt_rand(1, 99) <= 10) {
                 $event->setDrops([VanillaItems::APPLE()]);
             }
         }
-				
-		if(($level = $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($enchantment->getMcpeId()))) > 0) {
+
+        if (($level = $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($enchantment->getMcpeId()))) > 0) {
             $add = mt_rand(0, $level + 1);
 
             if ($block->isSameState(VanillaBlocks::OAK_LEAVES())) {
@@ -97,14 +98,14 @@ class Main extends PluginBase implements Listener
                     }
                     break;
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 
     /**
      * @param EntityDamageByEntityEvent $event
      */
-	public function onDamage(EntityDamageByEntityEvent $event) : void
+    public function onDamage(EntityDamageByEntityEvent $event): void
     {
         $player = $event->getEntity();
         $killer = $event->getDamager();
@@ -141,21 +142,22 @@ class Main extends PluginBase implements Listener
                         }
                         $player->flagForDespawn();
                     }
-			 	}
-			 }
-		}
-	}
+                }
+            }
+        }
+    }
 
     /**
      * @param array $drops
      * @param array $items
-     * @param int $add
+     * @param int   $add
      * @return array
      */
-	 public function getLootingDrops(array $drops, array $items, int $add) : array{
-         $lootingDrops = [];
-		
-	 	foreach($items as $ite) {
+    public function getLootingDrops(array $drops, array $items, int $add): array
+    {
+        $lootingDrops = [];
+
+        foreach ($items as $ite) {
             $item = LegacyStringToItemParser::getInstance()->parse($ite);
             /** @var Item $drop */
             foreach ($drops as $drop) {
@@ -166,18 +168,18 @@ class Main extends PluginBase implements Listener
                 break;
             }
         }
-         return $lootingDrops;
-	 }
+        return $lootingDrops;
+    }
 
     /**
      * @param EntityShootBowEvent $event
      */
-	 public function onShoot(EntityShootBowEvent $event) : void
-     {
-         $arrow = $event->getProjectile();
+    public function onShoot(EntityShootBowEvent $event): void
+    {
+        $arrow = $event->getProjectile();
 
-         if ($arrow::getNetworkTypeId() == EntityIds::ARROW) {
-             $event->setForce($event->getForce() + 0.95);
-         }
-     }
+        if ($arrow::getNetworkTypeId() == EntityIds::ARROW) {
+            $event->setForce($event->getForce() + 0.95);
+        }
+    }
 }

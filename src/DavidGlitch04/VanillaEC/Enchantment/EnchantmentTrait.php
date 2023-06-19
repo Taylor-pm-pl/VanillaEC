@@ -4,23 +4,27 @@ namespace DavidGlitch04\VanillaEC\Enchantment;
 
 use pocketmine\item\{Armor, Item, Tool, VanillaItems};
 
-trait EnchantmentTrait{
+trait EnchantmentTrait
+{
 
 
     abstract public function getId(): string;
+
     abstract public function getMcpeId(): int;
 
     /**
      * @return bool
      */
-    public function isTreasure(): bool{
+    public function isTreasure(): bool
+    {
         return false;
     }
 
     /**
      * @return int[]
      */
-    public function getIncompatibles(): array{
+    public function getIncompatibles(): array
+    {
         return [];
     }
 
