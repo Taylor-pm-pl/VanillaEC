@@ -3,14 +3,7 @@
 namespace DavidGlitch04\VanillaEC\Enchantment;
 
 use pocketmine\data\bedrock\EnchantmentIds;
-use pocketmine\item\{
-    Axe,
-    Item,
-    Sword,
-    enchantment\Enchantment,
-    enchantment\ItemFlags,
-    enchantment\Rarity
-};
+use pocketmine\item\{Axe, enchantment\Enchantment, enchantment\ItemFlags, enchantment\Rarity, Item, Sword};
 use pocketmine\lang\KnownTranslationFactory;
 
 class BaneOfArthropodsEnchantment extends Enchantment{
@@ -20,7 +13,13 @@ class BaneOfArthropodsEnchantment extends Enchantment{
      * BaneOfArthropodsEnchantment constructor.
      */
     public function __construct(){
-        parent::__construct(KnownTranslationFactory::enchantment_damage_arthropods(), Rarity::UNCOMMON, ItemFlags::SWORD, ItemFlags::AXE, 5);
+        parent::__construct(
+            KnownTranslationFactory::enchantment_damage_arthropods(),
+            Rarity::UNCOMMON,
+            ItemFlags::SWORD,
+            ItemFlags::AXE,
+            5
+        );
     }
 
     /**

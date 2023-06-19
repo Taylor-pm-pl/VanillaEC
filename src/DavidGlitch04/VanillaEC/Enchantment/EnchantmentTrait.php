@@ -2,24 +2,10 @@
 
 namespace DavidGlitch04\VanillaEC\Enchantment;
 
-use pocketmine\item\{
-    Armor,
-    Item,
-    ItemIds,
-    Shovel,
-    Tool
-};
+use pocketmine\item\{Armor, Item, Tool, VanillaItems};
 
 trait EnchantmentTrait{
 
-    /**
-     * @var int
-     * i've made it static since you can't make const in traits
-     * extending PMMP Enchantment.php wouldnt work due to fact
-     * some enchantment such as knockback needs to extend pmmp
-     * Knockback class
-     */
-    public static int $SLOT_CROSSBOW = 0x10000;
 
     abstract public function getId(): string;
     abstract public function getMcpeId(): int;
@@ -43,13 +29,15 @@ trait EnchantmentTrait{
      * @return bool
      * default it returns global compatibilities
      */
-    public function isItemCompatible(Item $item): bool{
-        return $item instanceof Armor || $item instanceof Tool || $item instanceof Shovel || in_array($item->getId(), [
-                ItemIds::FISHING_ROD, ItemIds::BOW,
-                ItemIds::SHEARS, ItemIds::FLINT_AND_STEEL,
-                ItemIds::CARROT_ON_A_STICK, ItemIds::SHIELD,
-                ItemIds::ELYTRA, ItemIds::TRIDENT,
-                ItemIds::CROSSBOW
+    public function isItemCompatible(Item $item): bool
+    {
+        return $item instanceof Armor ||
+            $item instanceof Tool ||
+            in_array($item->getVanillaName(), [
+                VanillaItems::FISHING_ROD()->getVanillaName(),
+                VanillaItems::BOW()->getVanillaName(),
+                VanillaItems::SHEARS()->getVanillaName(),
+                VanillaItems::FLINT_AND_STEEL()->getVanillaName()
             ]);
     }
 }

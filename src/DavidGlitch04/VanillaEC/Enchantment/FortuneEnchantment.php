@@ -3,13 +3,7 @@
 namespace DavidGlitch04\VanillaEC\Enchantment;
 
 use pocketmine\data\bedrock\EnchantmentIds;
-use pocketmine\item\{
-    enchantment\Enchantment,
-    enchantment\ItemFlags,
-    enchantment\Rarity,
-    Item,
-    Tool
-};
+use pocketmine\item\{enchantment\Enchantment, enchantment\ItemFlags, enchantment\Rarity, Item, Tool};
 use pocketmine\lang\KnownTranslationFactory;
 
 class FortuneEnchantment extends Enchantment{
@@ -19,7 +13,13 @@ class FortuneEnchantment extends Enchantment{
      * FortuneEnchantment constructor.
      */
     public function __construct(){
-        parent::__construct(KnownTranslationFactory::enchantment_lootBonusDigger(), Rarity::RARE, ItemFlags::DIG, ItemFlags::NONE, 3);
+        parent::__construct(
+            KnownTranslationFactory::enchantment_lootBonusDigger(),
+            Rarity::RARE,
+            ItemFlags::DIG,
+            ItemFlags::NONE,
+            3
+        );
     }
 
     public function getId(): string{

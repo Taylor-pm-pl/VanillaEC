@@ -15,7 +15,13 @@ class SmiteEnchantment extends Enchantment{
     use EnchantmentTrait;
 
     public function __construct(){
-        parent::__construct(KnownTranslationFactory::enchantment_damage_undead(), Rarity::UNCOMMON, ItemFlags::SWORD, ItemFlags::AXE, 5);
+        parent::__construct(
+            KnownTranslationFactory::enchantment_damage_undead(),
+            Rarity::UNCOMMON,
+            ItemFlags::SWORD,
+            ItemFlags::AXE,
+            5
+        );
     }
 
     public function getId(): string{
