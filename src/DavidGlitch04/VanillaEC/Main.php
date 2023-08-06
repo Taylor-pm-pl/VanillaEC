@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DavidGlitch04\VanillaEC;
 
 use DavidGlitch04\VanillaEC\Enchantment\{BaneOfArthropodsEnchantment,
-    FortuneEnchantment,
+    DepthStriderEnchantment,
     LootingEnchantment,
     SmiteEnchantment};
 use pocketmine\block\VanillaBlocks;
@@ -17,6 +17,7 @@ use pocketmine\event\Listener;
 use pocketmine\item\{enchantment\StringToEnchantmentParser, Item, LegacyStringToItemParser, VanillaItems};
 use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\player\Player;
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener
@@ -44,10 +45,10 @@ class Main extends PluginBase implements Listener
     {
         $this->saveDefaultConfig();
         $enchants = [
-            new FortuneEnchantment(),
             new LootingEnchantment(),
             new SmiteEnchantment(),
-            new BaneOfArthropodsEnchantment()
+            new BaneOfArthropodsEnchantment(),
+            new DepthStriderEnchantment(),
         ];
         foreach ($enchants as $enchant) {
             EnchantmentIdMap::getInstance()->register($enchant->getMcpeId(), $enchant);
@@ -180,6 +181,31 @@ class Main extends PluginBase implements Listener
 
         if ($arrow::getNetworkTypeId() == EntityIds::ARROW) {
             $event->setForce($event->getForce() + 0.95);
+        }
+    }
+
+        /**
+     * @param PlayerMoveEvent $event
+     */
+    public function onPlayerMove(PlayerMoveEvent $event): void
+    {
+        $player = $event->getPlayer();
+        $item = $player->getArmorInventory()->getBoots();
+        $depthStriderEnchantment = new DepthStriderEnchantment();
+
+        if ($item !== null && $item->hasEnchantment(EnchantmentIdMap::getInstance()->fromId($depthStriderEnchantment->getMcpeId()))) {
+            $level = $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($depthStriderEnchantment->getMcpeId()));
+
+            if ($player->isSwimming()) {
+                $speed = 0.1 + ($level * 0.07);
+                $player->setMovementSpeed($speed);
+            }
+            if ($player->isUnderwater()) {
+                $speed = 0.05 + ($level * 0.03);
+                $player->setMovementSpeed($speed);
+            } else {
+                $player->setMovementSpeed(0.1);
+            }
         }
     }
 }
