@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DavidGlitch04\VanillaEC;
 
 use DavidGlitch04\VanillaEC\Enchantment\{BaneOfArthropodsEnchantment,
-    FortuneEnchantment,
     LootingEnchantment,
     SmiteEnchantment};
 use pocketmine\block\VanillaBlocks;
@@ -44,7 +43,6 @@ class Main extends PluginBase implements Listener
     {
         $this->saveDefaultConfig();
         $enchants = [
-            new FortuneEnchantment(),
             new LootingEnchantment(),
             new SmiteEnchantment(),
             new BaneOfArthropodsEnchantment()
@@ -59,49 +57,6 @@ class Main extends PluginBase implements Listener
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
-
-    /**
-     * @param BlockBreakEvent $event
-     */
-    public function onBreak(BlockBreakEvent $event): void
-    {
-        $block = $event->getBlock();
-        $item = $event->getItem();
-        $enchantment = new FortuneEnchantment();
-
-        if ($block->isSameState(VanillaBlocks::OAK_LEAVES())) {
-            if (mt_rand(1, 99) <= 10) {
-                $event->setDrops([VanillaItems::APPLE()]);
-            }
-        }
-
-        if (($level = $item->getEnchantmentLevel(EnchantmentIdMap::getInstance()->fromId($enchantment->getMcpeId()))) > 0) {
-            $add = mt_rand(0, $level + 1);
-
-            if ($block->isSameState(VanillaBlocks::OAK_LEAVES())) {
-                if (mt_rand(1, 99) <= 10) {
-                    $event->setDrops([VanillaItems::APPLE()]);
-                }
-            }
-
-            foreach ($this->getConfig()->get("fortune.blocks", []) as $str) {
-                $itemFortune = LegacyStringToItemParser::getInstance()->parse($str);
-
-                if ($block->asItem()->equals($itemFortune)) {
-                    if (mt_rand(1, 99) <= 10 * $level) {
-                        if (!empty($event->getDrops())) {
-                            $event->setDrops(array_map(function (Item $drop) use ($add) {
-                                $drop->setCount($drop->getCount() + $add);
-                                return $drop;
-                            }, $event->getDrops()));
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-    }
-
     /**
      * @param EntityDamageByEntityEvent $event
      */
